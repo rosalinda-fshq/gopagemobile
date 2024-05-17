@@ -1,5 +1,11 @@
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 
-export default function Login() {
-  return <Text>Login</Text>;
-}
+const Login = () => {
+  return (
+    <View>
+      <Text>Login</Text>
+    </View>
+  );
+};
+
+export default Login;

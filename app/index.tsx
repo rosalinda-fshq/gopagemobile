@@ -1,3 +1,4 @@
+import Button from "@/components/Button";
 import SwipeSlider from "@/components/SwipeSlider";
 import { Link } from "expo-router";
 import React from "react";
@@ -16,7 +17,7 @@ export default function Page() {
           <Link
             href="/signup"
             asChild
-            className="bg-[#a4c73a] w-[50%] py-2 px-2"
+            className="bg-[#a4c73a] w-[50%] py-2 px-2 rounded"
           >
             <Pressable>
               <Text className="text-white text-center text-[18px]">
@@ -27,7 +28,7 @@ export default function Page() {
           <Link
             href="/login"
             asChild
-            className="bg-white border w-[50%] border-[#a4c73a] py-2 px-2"
+            className="bg-white border w-[50%] border-[#a4c73a] py-2 px-2 rounded"
           >
             <Pressable>
               <Text className="text-[#a4c73a] text-center text-[18px]">
