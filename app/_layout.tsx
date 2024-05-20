@@ -1,6 +1,7 @@
-import { Stack, useNavigation } from "expo-router";
+import { Stack } from "expo-router";
 import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Layout() {
   return (
@@ -14,6 +15,22 @@ export default function Layout() {
           headerLeft: CustomBackButton,
         }}
       />
+      <Stack.Screen
+        name="login"
+        options={{
+          headerShown: false,
+          headerTitle: "",
+          headerLeft: CustomBackButton,
+        }}
+      />
+      <Stack.Screen
+        name="resetPassword"
+        options={{
+          headerShown: false,
+          headerTitle: "",
+          headerLeft: CustomBackButton,
+        }}
+      />
     </Stack>
   );
 }
@@ -21,8 +38,15 @@ export default function Layout() {
 const CustomBackButton = () => {
   const navigation = useNavigation();
 
+  const handlePress = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "index" }],
+    });
+  };
+
   return (
-    <TouchableOpacity onPress={() => navigation.goBack()}>
+    <TouchableOpacity onPress={handlePress}>
       <Ionicons name="chevron-back-outline" size={24} color="black" />
     </TouchableOpacity>
   );

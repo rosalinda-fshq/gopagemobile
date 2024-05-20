@@ -1,30 +1,26 @@
 import Divider from "@/components/Divider";
-import { Link, router } from "expo-router";
-import React, { useState } from "react";
-import {
-  Pressable,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Button,
-} from "react-native";
-import { emailValidator } from "../helpers/emailValidator";
-import { passwordValidator } from "../helpers/passwordValidator";
-
-import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
+import { Link, router } from "expo-router";
+import { View, Text, TextInput, Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { emailValidator } from "@/helpers/emailValidator";
+import { passwordValidator } from "@/helpers/passwordValidator";
+import { useState } from "react";
+import { nameValidator } from "@/helpers/nameValidator";
 
-const Login = () => {
+const EmailSignup = () => {
   const navigation = useNavigation();
 
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
+  const [name, setName] = useState({ value: "", error: "" });
 
-  const onLoginPressed = () => {
+  const onSignUpPressed = () => {
+    const nameError = nameValidator(name.value);
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
-    if (emailError || passwordError) {
+    if (emailError || passwordError || nameError) {
+      setName({ ...name, error: nameError });
       setEmail({ ...email, error: emailError });
       setPassword({ ...password, error: passwordError });
       return;
@@ -42,44 +38,47 @@ const Login = () => {
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
-
   return (
-    <View className="relative pt-14 pb-12 px-14">
-      <View className="relative left-72">
+    <View className="relative pt-14 pb-12 px-8 space-y-4">
+      <View className="relative left-80">
         <Pressable
           onPress={() =>
             navigation.reset({
               index: 0,
-              routes: [{ name: "index" }],
+              routes: [{ name: "login" }],
             })
           }
         >
           <Ionicons name="close-outline" size={24} color="black" />
         </Pressable>
       </View>
-      <Text className="text-xl text-center mb-8 text-gray-500">
-        Welcome Back
+      <Text className="text-gray-500">
+        Sign up with <Text className="text-orange-500">Facebook , Google </Text>
+        or <Text className="text-orange-500">mobile number</Text>
       </Text>
-      <View className="flex  w-full justify-center gap-y-4">
-        <Link href="/signup" asChild className="bg-[#4267B2] py-4 px-4 rounded">
-          <Pressable>
-            <Text className="text-white text-center text-[18px]">
-              Continue with Facebook
-            </Text>
-          </Pressable>
-        </Link>
-        <Link href="/login" asChild className="bg-[#DB4437] py-4 px-4 rounded">
-          <Pressable>
-            <Text className="text-white text-center text-[18px]">
-              Continue with Google
-            </Text>
-          </Pressable>
-        </Link>
-      </View>
-      <View className="flex flex-row items-center gap-2 py-6">
-        <Divider length="50%" />
-        <Text>or</Text>
-        <Divider length="50%" />
+      <View>
+        <TextInput
+          label=" First Name"
+          returnKeyType="next"
+          value={name.value}
+          onChangeText={(text) => setName({ value: text, error: "" })}
+          error={!!name.error}
+          errorText={name.error}
+          placeholder="First name"
+          placeholderTextColor="gray"
+          className="text-gray-500  text-[18px] flex flex-row items-center justify-between bg-gray-200 py-4 px-4 rounded mb-4"
+        />
+        <TextInput
+          label="Last Name"
+          returnKeyType="next"
+          value={name.value}
+          onChangeText={(text) => setName({ value: text, error: "" })}
+          error={!!name.error}
+          errorText={name.error}
+          placeholder="Last name"
+          placeholderTextColor="gray"
+          className="text-gray-500  text-[18px] flex flex-row items-center justify-between bg-gray-200 py-4 px-4 rounded mb-4"
+        />
       </View>
       <View
         className={`flex flex-row items-center justify-between bg-gray-200 py-4 px-4 rounded ${
@@ -97,7 +96,7 @@ const Login = () => {
           autoCompleteType="email"
           textContentType="emailAddress"
           keyboardType="email-address"
-          placeholder="Email or Mobile Number"
+          placeholder="Email"
           placeholderTextColor="gray"
           className="text-gray-500  text-[18px]"
         />
@@ -132,27 +131,21 @@ const Login = () => {
         <Text className="text-red-500  mb-4">{password.error}</Text>
       ) : null}
       <View className="bg-[#a4c73a] py-4 px-4 rounded">
-        <Pressable onPress={onLoginPressed}>
+        <Pressable onPress={onSignUpPressed}>
           <Text className="text-orange-500 text-white text-center text-[18px]">
-            Log In
+            Sign Up
           </Text>
         </Pressable>
       </View>
+      <Divider length="100%" />
       <View className="flex flex-row gap-2 justify-center mt-4">
-        <TouchableOpacity onPress={() => router.push("/resetPassword")}>
-          <Text className="text-orange-500 text-[16px]">
-            Forgot your password ?
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <View className="flex flex-row gap-2 justify-center mt-4">
-        <Text className="text-[16px]">Don't have an account?</Text>
-        <Pressable onPress={() => router.push("/signup")}>
-          <Text className="text-orange-500 text-[16px]">Sign Up</Text>
+        <Text>Already have an account?</Text>
+        <Pressable onPress={() => router.push("/login")}>
+          <Text className="text-orange-500">Log in</Text>
         </Pressable>
       </View>
     </View>
   );
 };
 
-export default Login;
+export default EmailSignup;

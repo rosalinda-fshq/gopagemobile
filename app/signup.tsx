@@ -27,7 +27,11 @@ const Signup = () => {
         <Divider length="50%" />
       </View>
       <View className="flex  w-full justify-center gap-y-4">
-        <Link href="/signup" asChild className="bg-[#a4c73a] py-4 px-4 rounded">
+        <Link
+          href="/emailSignup"
+          asChild
+          className="bg-[#a4c73a] py-4 px-4 rounded"
+        >
           <Pressable>
             <Text className="text-white text-center text-[18px]">
               Sign up with Email
