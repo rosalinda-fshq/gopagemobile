@@ -1,5 +1,4 @@
-import Button from "@/components/Button";
-import SwipeSlider from "@/components/SwipeSlider";
+import SwiperSlider from "@/components/SwipeSlider";
 import { Link } from "expo-router";
 import React from "react";
 import { Pressable, Text, View, Image } from "react-native";
@@ -7,12 +6,12 @@ import { Pressable, Text, View, Image } from "react-native";
 export default function Page() {
   return (
     <>
-      <View className="relative flex items-center justify-center pt-14 pb-12 px-14">
-        <Image
+      <View className="relative flex-1 items-center justify-center pt-14 pb-12 px-10">
+       <Image
           className="w-[50%] h-[15%] mb-16"
           source={require("../assets/images/gopageLogo.png")}
         />
-        <SwipeSlider />
+        <SwiperSlider />
         <View className="flex flex-row w-full justify-center gap-4 ">
           <Link
             href="/signup"
