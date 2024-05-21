@@ -1,16 +1,13 @@
+import Logo from "@/components/Logo";
 import SwiperSlider from "@/components/SwipeSlider";
 import { Link } from "expo-router";
 import React from "react";
-import { Pressable, Text, View, Image } from "react-native";
+import { Pressable, Text, View } from "react-native";
 
 export default function Page() {
   return (
-    <>
-      <View className="relative flex-1 items-center justify-center pt-14 pb-12 px-10">
-       <Image
-          className="w-[50%] h-[15%] mb-16"
-          source={require("../assets/images/gopageLogo.png")}
-        />
+      <View className="relative w-full flex-1 items-center justify-center pt-[100px] pb-[20px] px-[20px] max-w-[340px] self-center">
+        <Logo />
         <SwiperSlider />
         <View className="flex flex-row w-full justify-center gap-4 ">
           <Link
@@ -37,6 +34,5 @@ export default function Page() {
           </Link>
         </View>
       </View>
-    </>
   );
 }
