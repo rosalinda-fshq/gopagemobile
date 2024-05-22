@@ -14,6 +14,7 @@ import { passwordValidator } from "../helpers/passwordValidator";
 
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
+import ButtonComponent from "@/components/Button";
 
 const Login = () => {
   const navigation = useNavigation();
@@ -61,20 +62,18 @@ const Login = () => {
         Welcome Back
       </Text>
       <View className="flex  w-full justify-center gap-y-4">
-        <Link href="/signup" asChild className="bg-[#4267B2] py-4 px-4 rounded">
-          <Pressable>
-            <Text className="text-white text-center text-[18px]">
-              Continue with Facebook
-            </Text>
-          </Pressable>
-        </Link>
-        <Link href="/login" asChild className="bg-[#DB4437] py-4 px-4 rounded">
-          <Pressable>
-            <Text className="text-white text-center text-[18px]">
-              Continue with Google
-            </Text>
-          </Pressable>
-        </Link>
+        <ButtonComponent
+          text="Continue with Facebook"
+          textColor="text-white"
+          intent="tertiary"
+          onPress={() => navigation.navigate("signup")}
+        />
+        <ButtonComponent
+          text=" Continue with Google"
+          textColor="text-white"
+          intent="btnRed"
+          onPress={() => navigation.navigate("signup")}
+        />
       </View>
       <View className="flex flex-row items-center gap-2 py-6">
         <Divider length="50%" />
@@ -131,13 +130,12 @@ const Login = () => {
       {password.error ? (
         <Text className="text-red-500  mb-4">{password.error}</Text>
       ) : null}
-      <View className="bg-[#a4c73a] py-4 px-4 rounded">
-        <Pressable onPress={onLoginPressed}>
-          <Text className="text-orange-500 text-white text-center text-[18px]">
-            Log In
-          </Text>
-        </Pressable>
-      </View>
+      <ButtonComponent
+        text="Log In"
+        textColor="text-white"
+        intent="primary"
+        onPress={onLoginPressed}
+      />
       <View className="flex flex-row gap-2 justify-center mt-4">
         <TouchableOpacity onPress={() => router.push("/resetPassword")}>
           <Text className="text-orange-500 text-[16px]">
